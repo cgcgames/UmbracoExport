@@ -25,32 +25,27 @@ $bp-nav: $bp-md;
 $white: #ffffff;        //Page bg
 $black: #000000;
 $transparent: transparent;
+$orange: #E16B1B;
 
 $themes: (
     default: ( 
-        base: $blue, 
-        darken: $blue-dark, 
-        lighten: $blue-lighter, 
+        base: $orange, 
+        darken: darken($orange, 10%), 
+        lighten: lighten($orange, 10%), 
         contrast: $white 
     ),
     white: ( 
         base: $white, 
-        darken: $blue-lighter, 
+        darken: lighten($orange, 50%), 
         lighten: $white, 
-        contrast: $orange
+        contrast: darken($orange, 50%)
     ),
     black: ( 
         base: $black, 
-        darken: $blue-dark, 
+        darken: darken($orange, 40%), 
         lighten: $black, 
         contrast: $white
-    ),
-    grey: ( 
-        base: $grey, 
-        darken: $grey-dark, 
-        lighten: $grey-light, 
-        contrast: $grey-darker
-    ),
+    )
 );
 
 

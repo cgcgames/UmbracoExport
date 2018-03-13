@@ -3,12 +3,12 @@
 }
 
 [data-whatintent="keyboard"] *:focus {
-    outline: 2px solid $purple;
+    outline: 2px solid $orange;
 }
 
 input {
     &:focus {
-        outline: 1px solid $purple;
+        outline: 1px solid $orange;
     }
 }
 

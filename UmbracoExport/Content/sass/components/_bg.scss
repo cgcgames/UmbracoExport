@@ -17,23 +17,3 @@
         }*/
     }
 }
-
-
-@each $name, $theme in $themes-gradient {
-    .bg-animated-gradient-#{$name} {
-        @include gradient-animate(45deg, 10s, (map-get($theme, 'from'), map-get($theme, 'to'), map-get($theme, 'from')));
-    }
-}
-
-
-@each $name, $theme in $themes-gradient {
-    .bg-gradient-#{$name} {
-        background: linear-gradient(-90deg,  map-get($theme, 'from'), map-get($theme, 'to'));
-    }
-}
-
-@each $name, $theme in $themes-gradient {
-    .bg-reverse-gradient-#{$name} {
-        background: linear-gradient(-90deg, map-get($theme, 'to'), map-get($theme, 'from'));
-    }
-}
