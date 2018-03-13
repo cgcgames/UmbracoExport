@@ -1,0 +1,25 @@
+﻿[data-whatintent="mouse"] *:focus {
+    outline: none;
+}
+
+[data-whatintent="keyboard"] *:focus {
+    outline: 2px solid $purple;
+}
+
+input {
+    &:focus {
+        outline: 1px solid $purple;
+    }
+}
+
+.border-right-black-sm {
+    @include min($bp-sm) {
+        border-right: 1px solid $black;
+    }
+}
+
+.border-right-blue-sm {
+    @include min($bp-sm) {
+        border-right: 1px solid $blue;
+    }
+}

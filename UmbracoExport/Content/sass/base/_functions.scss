@@ -1,0 +1,66 @@
+﻿/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+// Used for "min" and "max" media query mixins
+@function em($target, $context: 16) {
+    @return ($target / $context) + 0em;
+}
+
+@function calculate-rem($size) {
+    $rem-size: $size / 16px;
+    @return $rem-size * 1rem;
+}
+
+@function z($name) {
+    @if index($z-indexes, $name) {
+        @return ((length($z-indexes) - index($z-indexes, $name)) + 1)*10;
+    }
+    @else {
+        @warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}';
+        @return null;
+    }
+}
+//Z-indexes map is in variable https://codepen.io/vinceumo/pen/MmQrbK
+//Use classes in $z-indexes to orden your z-index.
+//The lower one start at 10 the one above take +10,
+//To include it with use z-index: z('navbar-lower');
+//Ex:
+//.navbar.navbar-lower{z-index: z('navbar-lower');} If navbar-lower is the lower one in the list will output 10;
+
+//If you want to z-index one item to another one you can use z-indexes list and add or substract from 1 to 9
+//Ex you want navbar-upper to be just -2 than navbar-lower;
+//.navbar-upper{z-index: z('navbar-lower') - 2;} If navbar-lower is the lower one in the list will output 8 /!\ don't forget the space ;);
+
+/// Map deep get
+/// @author Hugo Giraudel
+/// @access public
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Key chain
+/// @return {*} - Desired value
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+
+    @return $map;
+}
+
+@function color($palette, $tone: 'base') {
+    @return map-get(map-get($themes, $palette), $tone);
+}
+
+@function color-light($palette, $tone: 20) {
+    @return map-get(map-get($themes-light, $palette), $tone);
+}
+
+@function color-dark($palette, $tone: 20) {
+    @return map-get(map-get($themes-dark, $palette), $tone);
+}

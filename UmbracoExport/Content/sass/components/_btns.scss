@@ -1,0 +1,113 @@
+// Button base
+.btn {
+    display: inline-block;
+    font-weight: normal;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    padding: 1.25rem 1.25rem 1rem;
+    border-radius: 0rem;
+    transition: all 0.6s ease-in-out;
+    min-width: 175px;
+    cursor: pointer;
+
+    &.btn-form {
+        max-height: 45px;
+        padding-top: 0.8rem;
+        padding-bottom: 0.75rem;
+    }
+
+    &.btn-icon {
+        padding-left: 3.1875rem;
+        overflow: hidden;
+
+        i {
+            position: relative;
+            display: block;
+
+            &:before {
+                font-size: 1.5rem;
+                position: absolute;
+                left: -31px;
+                top: -2px;
+            }
+        }
+    }
+
+    &[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+// Button color variations
+@each $name, $theme in $themes {
+    .btn-#{$name} {
+        color: map-get($theme, 'contrast');
+        background: map-get($theme, 'base');
+
+        @include hover-focus {
+            background: map-get($theme, 'lighten');
+            //color: map-get($theme, 'darken');
+        }
+    }
+}
+ 
+@each $name, $theme in $themes {
+    .btn-outline-#{$name} {
+        color: map-get($theme, 'base');
+        background: $transparent;
+        border-color: map-get($theme, 'base');
+
+        @include hover-focus {
+            color: map-get($theme, 'contrast');
+            background: map-get($theme, 'base');
+        }
+    }
+}
+
+.btn-round {
+    border: 0;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+
+button.btn-reset-style {
+    /*color: inherit;*/
+    border: none;
+    padding: 0;
+    font: inherit;
+
+    &.is-in-footer{
+        background-color: transparent;
+        min-width: 0;
+    }
+}
+
+button {
+    cursor: pointer;
+}
+
+.btn-dropdown-icon {
+    position: relative;
+
+    &:after {
+        font-family: $icon;
+        content: '\e906';
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translate(-50%, -50%) rotate(0);
+        font-size: 1.5rem;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    &.collapsed {
+        &:after {
+            transform: translate(-50%, -50%) rotate(180deg);
+        }
+    }
+}

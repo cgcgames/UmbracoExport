@@ -1,0 +1,40 @@
+﻿.img-cover {
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &.focus-right-top {
+        background-position: right top;
+    }
+
+    &.focus-right-center {
+        background-position: right center;
+    }
+
+    &.focus-right-bottom {
+        background-position: right bottom;
+    }
+
+    &.focus-center-top {
+        background-position: center top;
+    }
+
+    &.focus-center-center {
+        background-position: center center;
+    }
+
+    &.focus-center-bottom {
+        background-position: center bottom;
+    }
+
+    &.focus-left-top {
+        background-position: left top;
+    }
+
+    &.focus-left-center {
+        background-position: left center;
+    }
+
+    &.focus-left-bottom {
+        background-position: left bottom;
+    }
+}

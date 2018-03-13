@@ -1,0 +1,38 @@
+﻿//Call BS before in case variables clash remember need to use an autoprefixer on the css
+//@import "vendors/bootstrap4.0.0.b2/_bootstrap-reboot";
+@import "vendors/bootstrap4.0.0.b2/_bootstrap-grid";
+@import "vendors/bootstrap4.0.0.b2/_bootstrap"; //Can cherry pick in this file for functionality need to add bootstrap.js and popper.js
+
+@import "base/functions";
+@import "base/variables";
+@import "base/normalize";
+@import "base/mixins";
+
+@import "vendors/family/family";                  // https://github.com/LukyVj/family.scss
+@import "vendors/font-awesome";
+
+@import "helpers/fonts";
+@import "helpers/z-index";
+@import "helpers/font-sizes";
+@import "helpers/accessibility";
+
+//Overrides
+@import "helpers/bootstrap-overrides/bootstrap-overrides";
+
+@import "components/bg";
+@import "components/btns";
+@import "components/burger";
+@import "components/form-elements";
+@import "components/image-background";
+@import "components/links";
+@import "components/outline-style";
+@import "components/responsive";
+@import "components/text";
+@import "components/titles";
+@import "components/sections";
+@import "components/notification-box";
+@import "components/class-variables";
+@import "components/mobile-div-tabs";
+@import "components/spinner";
+
+@import "themes/umbraco-base-theme";

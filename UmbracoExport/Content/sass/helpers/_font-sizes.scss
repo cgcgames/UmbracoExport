@@ -1,0 +1,82 @@
+﻿//Use map in Variables
+
+html {
+    @include font-size($base-font-sizes);
+    font-family: $paragraph;
+}
+
+p, ul li {
+    @include font-size($p-font-sizes);
+}
+
+ul li {
+    margin-bottom: 0;
+}
+
+.subtitle-text {
+    @include font-size($subtitle-text);
+}
+
+h1, .heading1 {
+    @include font-size($h1-font-sizes);
+
+    img {
+        height: 1em;
+    }
+}
+
+h2, .heading2 {
+    @include font-size($h2-font-sizes);
+
+    img {
+        height: 1em;
+    }
+}
+
+h3, .heading3 {
+    @include font-size($h3-font-sizes);
+
+    img {
+        height: 1em;
+    }
+}
+
+h4, .heading4 {
+    @include font-size($h4-font-sizes);
+
+    img {
+        height: 1em;
+    }
+}
+
+h5, .heading5 {
+    @include font-size($h5-font-sizes);
+
+    img {
+        height: 1em;
+    }
+}
+
+h6, .heading6 {
+    @include font-size($h6-font-sizes);
+
+    img {
+        height: 1em;
+    }
+}
+
+.xs-text, .xs-text li {
+    @include font-size($xs-text);
+
+    img {
+        height: 1em;
+    }
+}
+
+.sm-text {
+    @include font-size($sm-text);
+
+    img {
+        height: 1em;
+    }
+}

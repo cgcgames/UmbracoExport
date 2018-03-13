@@ -1,0 +1,439 @@
+﻿
+//  Text overflow
+//  An easy way to truncate text with an ellipsis.
+//  Example usage:
+//
+// .text-truncate
+// {
+//     @include text-truncate()
+// }
+@mixin text-truncate($overflow: ellipsis) {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: $overflow; // values are: clip, ellipsis, or a string
+}
+
+
+// Absolute Positioning - shorthand
+//
+// Example usage:
+//
+// .relative-container {
+//     @include .abs-pos(50px, 10px, 50px, 0);
+// }
+@mixin abs-pos($top: auto, $right: auto, $bottom: auto, $left: auto) {
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+    position: absolute;
+}
+
+//    Rem font sizing with fallback
+//    Note: "calculate-rem" function is required for use
+
+//    Example usage:
+
+//    p { @include font-size(16px); }
+//
+//    Would output (assuming base element html, body etc is set to 16px:
+//
+//    p { font-size: 1rem; }
+@mixin font-size($size) {
+    font-size: calculate-rem($size);
+}
+
+//    Border-radius
+//
+//    background-clip: padding-box is set to fix an overflow bug in some browsers
+//    where the background is still partially visible despite border-radius
+//    rounding the corners
+//
+@mixin tab-radius($top: 0, $bottom: 0) {
+    border-radius: $top $top $bottom $bottom;
+    background-clip: padding-box;
+}
+
+@mixin border-radius($radius: 8px) {
+    border-radius: $radius;
+    background-clip: padding-box;
+}
+
+@mixin corner-radius($topleft: 0, $topright: 0, $bottomright: 0, $bottomleft: 0) {
+    border-radius: $topleft $topright $bottomright $bottomleft;
+    background-clip: padding-box;
+}
+
+
+//    Used for shorthand media queries
+//    Note: "em" function is required for use
+
+//    Example usage:
+
+//    h2 {
+//        font-size: 24px;
+
+//        @include min(768) { font-size: 30px; }
+//        @include min(992) { font-size: 36px; }
+//    }
+@mixin min($bp, $max: 'null', $device: 'screen') {
+    $bp: em($bp);
+    @if $max == 'null' {
+        @media only #{$device} and (min-width: #{$bp}) { @content; }
+    } @else {
+        $max: em($max);
+        @media only #{$device} and (min-width: #{$bp}) and (max-width: #{$max}) { @content; }
+    }
+}
+
+@mixin max($bp, $min: 'null', $device: 'screen') {
+    $bp: em($bp);
+    @if $min == 'null' {
+        @media only #{$device} and (max-width: #{$bp}){@content;}
+    } @else {
+        $min: em($min);
+        @media only #{$device} and (max-width: #{$bp}) and (min-width: #{$min}) { @content; }
+    }
+}
+
+
+//    Center an element vertically and horizontally within a container
+//        - container must be position: relative
+//        - container must be fixed height
+
+//    Example usage:
+
+//    .social {
+//        position: relative;
+
+//        @include min(992) {
+//            height: 460px;
+//            margin-top: 0;
+//            padding: 0;
+//            overflow: hidden;
+
+//            & .absolute-center {
+//                @include absolute-center();
+//            }
+//        }
+//    }
+@mixin absolute-center() {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+//    Will align content to center in mobile view (a common requirement) and align to
+//    $position at the $breakpoint (and above)
+
+//    Defaults set to left and 480px
+
+//    Example usage:
+
+//    h2 {
+//        font-size: 24px;
+//        @include center-xs(left, $bp-sm)
+//    }
+//
+//    Would suggest passing $breakpoint as your mobile > tablet breakpoint e.g.
+//    $bp-sm (768px)
+@mixin center-xs($position: 'left', $breakpoint: '480px') {
+    text-align: center;
+
+    @include min($breakpoint) {
+        text-align: $position;
+    }
+}
+
+//    Hi resolution retina image alternative
+//    Example usage:
+
+//    div.logo {
+//        background: url("logo.png") no-repeat;
+//        @include image-2x("logo2x.png", 100px, 25px);
+//    }
+@mixin image-2x($image, $width, $height) {
+    @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6/2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
+        // on retina, use image that's scaled by 2
+        background-image: url($image);
+        background-size: $width $height;
+    }
+}
+
+
+//    Simple directional arrow (triangle) mixin
+//    Example usage:
+
+//    .arrowtest {
+//        @include arrow(right, $blue, 12);
+//    }
+@mixin arrow($direction, $color, $size) {
+    $rem-size: ($size / 10) + rem;
+
+    @if $direction == 'left' {
+        border-top: $rem-size solid transparent;
+        border-right: $rem-size solid $color;
+        border-bottom: $rem-size solid transparent;
+    }
+    @else if $direction == 'right' {
+        border-top: $rem-size solid transparent;
+        border-bottom: $rem-size solid transparent;
+        border-left: $rem-size solid $color;
+    }
+    @else if $direction == 'p' {
+        border-left: $rem-size solid transparent;
+        border-right: $rem-size solid transparent;
+        border-bottom: $rem-size solid $color;
+    }
+    @else if $direction == 'down' {
+        border-left: $rem-size solid transparent;
+        border-right: $rem-size solid transparent;
+        border-top: $rem-size solid $color;
+    }
+}
+
+
+//    Include font(s) via the file system
+//    Fonts folder should include woff and woff2 file formats (svg, ttf and eot are no longer needed)
+//    See: http://stackoverflow.com/questions/36105194/are-eot-ttf-and-svg-still-necessary-in-the-font-face-declaration
+
+//    Example usage:
+
+//    Within _fonts.scss:
+//
+//    @include fontface('defused','../fonts/defused/defused-webfont');
+//
+//    Then in use:
+//
+//    .defused {
+//        font-family: 'defused';
+//    }
+
+@mixin fontface($family, $src, $style: normal, $weight: normal) {
+    @font-face {
+        font-family: $family;
+        src: url('#{$src}.woff') format('woff'), url('#{$src}.woff2') format('woff2');
+        font-style: $style;
+        font-weight: $weight;
+    }
+}
+
+
+//  Proportional Ratio Keep a group of images with the same set ratio, regardless of their actual ratio
+//  How to use it ?
+//
+//  .parent{
+//      @include proportional-ratio(16, 9);
+//      img {
+//		    @include  proportional-ratio--img(100%);
+//	    }
+//  }
+
+@mixin proportional-ratio($width, $height) {
+    position: relative;
+    display: block;
+    height: 0;
+    padding-bottom: ($height / $width) * 100%;
+    overflow: hidden;
+}
+
+@mixin proportional-ratio--img($width) {
+    width: $width;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    position: absolute;
+}
+
+@mixin transition($transition) {
+    -moz-transition: $transition;
+    -o-transition: $transition;
+    -webkit-transition: $transition;
+    transition: $transition;
+}
+
+@mixin hover {
+    &:hover {
+        @content;
+    }
+}
+
+@mixin hover-focus {
+    &:hover, &:focus {
+        @content;
+    }
+}
+
+@mixin hover-focus-active {
+    &:hover, &:active, &:focus {
+        @content;
+    }
+}
+@mixin vendor-prefix($name, $value) {
+    @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
+        #{$vendor}#{$name}: #{$value};
+    }
+}
+/// Mixin to customize scrollbars
+/// Beware, this does not work in all browsers
+/// @author Hugo Giraudel
+/// @param {Length} $size - Horizontal scrollbar's height and vertical scrollbar's width
+/// @param {Color} $foreground-color - Scrollbar's color
+/// @param {Color} $background-color [mix($foreground-color, white, 50%)] - Scrollbar's color
+/// @example scss - Scrollbar styling
+///   @include scrollbars(.5em, slategray);
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white, 50%)) {
+    // For Google Chrome
+    ::-webkit-scrollbar {
+        width: $size;
+        height: $size;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: $foreground-color;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: $background-color;
+    }
+    // For Internet Explorer
+    body {
+        scrollbar-face-color: $foreground-color;
+        scrollbar-track-color: $background-color;
+    }
+}
+
+
+// Typography mixing to make life easier :)
+// (fontSize, LineHeight, FontWeight, LetterSpacing)
+// https://www.smashingmagazine.com/2015/06/responsive-typography-with-sass-maps/
+
+@mixin font-size($fs-map, $fs-breakpoints: $grid-breakpoints) {
+    @each $fs-breakpoint, $fs-font-size in $fs-map {
+        @if $fs-breakpoint == base {
+            @include make-font-size($fs-font-size);
+        }
+        @else {
+            // If $fs-font-size is a key that exists in
+            // $fs-breakpoints, use the value
+            @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+                $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+            }
+
+            @media screen and (min-width: $fs-breakpoint) { //add + 'px' if not using BS4 grid
+                @include make-font-size($fs-font-size);
+            }
+        }
+    }
+}
+
+
+// Utility function for mixin font-size
+// (fontSize, LineHeight, FontWeight, LetterSpacing, style, margin)
+@mixin make-font-size($fs-font-size) {
+    // If $fs-font-size is a list, include
+    // both font-size and line-height
+    @if type-of($fs-font-size) == "list" {
+        font-size: nth($fs-font-size, 1);
+
+        @if length($fs-font-size) > 1 {
+            @if nth($fs-font-size, 2) != null {
+                line-height: nth($fs-font-size, 2);
+            }
+        }
+
+        @if length($fs-font-size) > 2 {
+            @if nth($fs-font-size, 3) != null {
+                font-weight: nth($fs-font-size, 3);
+            }
+        }
+
+        @if length($fs-font-size) > 3 {
+            @if nth($fs-font-size, 4) != null {
+                letter-spacing: nth($fs-font-size, 4);
+            }
+        }
+
+        @if length($fs-font-size) > 4 {
+            @if nth($fs-font-size, 5) != null {
+                font-style: nth($fs-font-size, 5);
+            }
+        }
+
+        @if length($fs-font-size) > 5 {
+            @if nth($fs-font-size, 6) != null {
+                margin: nth($fs-font-size, 6);
+            }
+        }
+    }
+    @else {
+        font-size: $fs-font-size;
+    }
+}
+
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+
+    -webkit-animation: $animations;
+    -moz-animation: $animations;
+    -o-animation: $animations;
+    animation: $animations;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin gradient-animate($direction, $duration, $colors) {
+    $size: length($colors) * 200%;
+    background: linear-gradient($direction, $colors);
+    background-size: $size $size;
+
+    @include keyframes(gradient-animate) {
+        0% {
+            background-position: 0% 0%
+        }
+
+        50% {
+            background-position: 100% 100%
+        }
+
+        100% {
+            background-position: 0% 0%
+        }
+    };
+
+    @include animation(gradient-animate $duration linear infinite);
+}
+
+
+@mixin text-gradient($dir, $from, $to) {
+    background: -webkit-linear-gradient($dir, $from, $to);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

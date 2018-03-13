@@ -1,0 +1,25 @@
+﻿.section-pad--t {
+    position: relative;
+    padding-top: map-get($section-padding, 'base');
+
+    @include min($bp-sm) {
+        padding-top: map-get($section-padding, 'sm');
+    }
+
+    @include min($bp-md) {
+        padding-top: map-get($section-padding, 'md');
+    }
+}
+
+.section-pad--b {
+    position: relative;
+    padding-bottom: map-get($section-padding, 'base');
+
+    @include min($bp-sm) {
+        padding-bottom: map-get($section-padding, 'sm');
+    }
+
+    @include min($bp-md) {
+        padding-bottom: map-get($section-padding, 'md');
+    }
+}

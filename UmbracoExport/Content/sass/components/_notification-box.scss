@@ -1,0 +1,87 @@
+﻿.notification-box {
+    .text-block {
+        padding: 1.5rem 1.5rem 0.75rem 3rem;
+        position: relative;
+
+        &.notification-box-form {
+            max-width: 100%;
+        }
+
+        &.priority-notification {
+            //background-color: lighten($purple, 55%);
+        }
+
+        &.window-needs-replacement {
+            padding: 0.6875rem 4.5rem;
+
+            p {
+                margin: 0;
+            }
+
+            &:before {
+                top: 0;
+            }
+        }
+
+        @include min($bp-sm) {
+            padding: 1.5rem 1.5rem 0.75rem 4.5rem;
+        }
+
+        &:before {
+            font-family: 'awicon';
+            content: $awicon_bell;
+            position: absolute;
+            left: 8px;
+            top: 11px;
+            font-size: 2.125rem;
+
+            @include min($bp-sm) {
+                left: 22px;
+            }
+        }
+
+        &.icon--wifi {
+            &:before {
+                content: $awicon_wifi;
+            }
+        }
+
+        &.icon--question-mark {
+            &:before {
+                content: $awicon_question;
+            }
+        }
+
+        &.icon--clock {
+            &:before {
+                content: $awicon_clock;
+            }
+        }
+
+        &.icon--leaf {
+            &:before {
+                content: $awicon_leaf;
+                color: $green;
+            }
+        }
+
+        .live-chat-p {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+
+            &:before {
+                font-family: 'awicon';
+                content: $awicon_chat;
+                position: absolute;
+                left: -39px;
+                top: -10px;
+                font-size: 2rem;
+
+                @include min($bp-sm) {
+                    left: -48px;
+                }
+            }
+        }
+    }
+}

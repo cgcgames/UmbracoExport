@@ -1,0 +1,62 @@
+﻿.spinner {
+    animation: rotator $spinner-duration linear infinite;
+    width: 2rem;
+    height: 2rem;
+}
+
+@keyframes rotator {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+.path {
+    stroke-dasharray: $spinner-offset;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    stroke: $purple;
+    animation: dash $spinner-duration ease-in-out infinite, colors ($spinner-duration*4) ease-in-out infinite;
+}
+
+@keyframes colors {
+    0% {
+        stroke: $purple;
+    }
+
+    25% {
+        stroke: $blue;
+    }
+
+    50% {
+        stroke: $green;
+    }
+
+    75% {
+        stroke: $blue;
+    }
+
+    100% {
+        stroke: $purple;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: $spinner-offset;
+    }
+
+    50% {
+        stroke-dashoffset: $spinner-offset/4;
+        transform: rotate(135deg);
+    }
+
+    100% {
+        stroke-dashoffset: $spinner-offset;
+        transform: rotate(450deg);
+    }
+}
+

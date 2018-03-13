@@ -1,0 +1,143 @@
+﻿// Breakpoints shared with BS4
+$bp-ms: strip-unit(map-get($grid-breakpoints, ms));
+$bp-ms-max: strip-unit(map-get($grid-breakpoints, ms)) - 1;
+$bp-sm: strip-unit(map-get($grid-breakpoints, sm));
+$bp-sm-max: strip-unit(map-get($grid-breakpoints, sm)) - 1;
+$bp-md: strip-unit(map-get($grid-breakpoints, md));
+$bp-md-max: strip-unit(map-get($grid-breakpoints, md)) - 1;
+$bp-lg: strip-unit(map-get($grid-breakpoints, lg));
+$bp-max-page-width: 1920;
+/*$bp-ms: 480;
+$bp-ms-max: 479;
+$bp-sm: 768;
+$bp-sm-max: 767;
+$bp-md: 992;
+$bp-md-max: 991;
+$bp-lg: 1200;*/
+
+// map for the font mixin if not using BS4 grid
+//$grid-breakpoints: ( ms: $bp-ms, sm: $bp-sm, md: $bp-md, lg: $bp-lg );
+
+//CUSTOM BP
+$bp-nav: $bp-md;
+
+// Colours
+$white: #ffffff;        //Page bg
+$black: #000000;
+$transparent: transparent;
+
+$themes: (
+    default: ( 
+        base: $blue, 
+        darken: $blue-dark, 
+        lighten: $blue-lighter, 
+        contrast: $white 
+    ),
+    white: ( 
+        base: $white, 
+        darken: $blue-lighter, 
+        lighten: $white, 
+        contrast: $orange
+    ),
+    black: ( 
+        base: $black, 
+        darken: $blue-dark, 
+        lighten: $black, 
+        contrast: $white
+    ),
+    grey: ( 
+        base: $grey, 
+        darken: $grey-dark, 
+        lighten: $grey-light, 
+        contrast: $grey-darker
+    ),
+);
+
+
+// Fonts
+$basefont-size: 16;                    // Used in "em" function for media query min() and max() mixins
+$base-font-size-mobile-px: 16px;
+$base-font-size-px: 16px;
+
+// Values for each breakpoint can be single (font-size) or and array of items (all optional but need to be in order:
+// (fontSize, LineHeight, FontWeight, LetterSpacing, style, margin)
+// eg  (3.5rem, 1.2, 500, 1px, italic, 0 0 20px)
+// passing null as a value skips that property
+// Font sizing are called in helpers
+$base-font-sizes: (
+    //Set for REM use PX here
+    base: ($base-font-size-mobile-px, 1.5, 400),
+    sm: ($base-font-size-px),
+); 
+$p-font-sizes: (
+    base: (1rem, 1.8, null, null, null, 0 0 1.5rem),
+    sm: (1rem, 1.8),
+);
+$h1-font-sizes: (
+    base: (2.8125rem, 1, 600, null, null, 0 0 3.125rem 0),
+    ms: (3.125rem),
+);
+$h2-font-sizes: (
+    base: (2.5rem, 1.3, 300, null, null, 3rem 0 2rem 0),
+);
+$h3-font-sizes: (
+    base: (1.25rem, 1.3, 300, null, null, 3rem 0 2rem 0),
+);
+$h4-font-sizes: (
+    base: (1.50rem),
+);
+$h5-font-sizes: (
+    base: (1.25rem),
+);
+$h6-font-sizes: (
+    base: (1rem),
+);
+$main-nav-font-sizes: (
+    base: (0.875rem, null, 500),
+);
+$subtitle-text:(
+    base: (1.375rem),
+);
+$xs-text: (
+    base: (0.8125rem),
+);
+$sm-text: (
+    base: (0.9375rem),  
+);
+
+
+// Section padding
+/*$section-padding: (
+    base: 2.5rem,
+    sm: 4.375rem,
+    md: 5.625rem
+);
+$section-padding-half: (
+    base: 1.25rem,
+    sm: 2.188rem,
+    md: 2.813rem
+);*/
+$section-padding: ( 
+    base:1.25rem, 
+    sm: 2.8125rem, 
+    md: 3.4375rem 
+);
+
+
+// Font Family
+$paragraph: 'Poppins', Arial, "Helvetica Neue", Helvetica, sans-serif;
+$title: 'Poppins', Arial, "Helvetica Neue", Helvetica, sans-serif;
+$highlight: 'Poppins', Arial, "Helvetica Neue", Helvetica, sans-serif;
+$open-sans: 'Open Sans', Arial, "Helvetica Neue", Helvetica, sans-serif;
+$icon: 'awicon';
+
+//z-indexes
+//explaination in helpers/functions
+$z-indexes: (
+
+);
+
+//Sizes
+$burger-size: 20px;
+$spinner-offset: 187;
+$spinner-duration: 1.4s;
