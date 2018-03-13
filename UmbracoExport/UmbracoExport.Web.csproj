@@ -306,9 +306,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
+    <Compile Include="Controllers\UmbracoExportSurfaceController.cs" />
+    <Compile Include="Models\ViewModels\UmbracoExportViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -346,17 +345,13 @@
     <Content Include="Content\sass\components\_btns.scss" />
     <Content Include="Content\sass\components\_burger.scss" />
     <Content Include="Content\sass\components\_class-variables.scss" />
-    <Content Include="Content\sass\components\_form-elements.scss" />
     <Content Include="Content\sass\components\_image-background.scss" />
-    <Content Include="Content\sass\components\_links.scss" />
     <Content Include="Content\sass\components\_mobile-div-tabs.scss" />
-    <Content Include="Content\sass\components\_notification-box.scss" />
     <Content Include="Content\sass\components\_outline-style.scss" />
     <Content Include="Content\sass\components\_responsive.scss" />
     <Content Include="Content\sass\components\_sections.scss" />
     <Content Include="Content\sass\components\_spinner.scss" />
     <Content Include="Content\sass\components\_text.scss" />
-    <Content Include="Content\sass\components\_titles.scss" />
     <Content Include="Content\sass\helpers\bootstrap-overrides\_bootstrap-overrides.scss" />
     <Content Include="Content\sass\helpers\_accessibility.scss" />
     <Content Include="Content\sass\helpers\_font-sizes.scss" />
@@ -582,9 +577,7 @@
     <Content Include="Content\sass\vendors\modaal\_modaal.scss" />
     <Content Include="Content\sass\vendors\_font-awesome.scss" />
     <Content Include="Content\Scripts\customs\umbraco-starterkit-app.js" />
-    <Content Include="Content\Scripts\maps\scriptsBundleBooking.js.map" />
     <Content Include="Content\Scripts\maps\scriptsBundleMain.js.map" />
-    <Content Include="Content\Scripts\scriptsBundleBooking.js" />
     <Content Include="Content\Scripts\scriptsBundleMain.js" />
     <Content Include="Content\Scripts\vendors\better-dateinput-polyfill.js" />
     <Content Include="Content\Scripts\vendors\bootstrap.js" />
@@ -655,8 +648,6 @@
     <Folder Include="App_Start\" />
     <Folder Include="Content\sass\layout\" />
     <Folder Include="Content\sass\pages\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -681,10 +672,17 @@
     <Content Include="Views\Person.cshtml" />
     <Content Include="Views\Product.cshtml" />
     <Content Include="Views\Products.cshtml" />
+    <Content Include="Views\UmbracoExportSurface\_ExportForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UmbracoExport.Core\UmbracoExport.Core.csproj">
+      <Project>{dd8d3152-0f8b-42e2-903d-06dedc6b343d}</Project>
+      <Name>UmbracoExport.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
