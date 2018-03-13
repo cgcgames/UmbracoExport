@@ -5,11 +5,15 @@
     Html.EnableClientValidation(true);
     Html.EnableUnobtrusiveJavaScript(true);
 }
-
-@if (Convert.ToBoolean(TempData["IsSuccessful"]))
+@if (Convert.ToBoolean(TempData["Error"]))
 {
-    <h1>YAY!</h1>
-    <p>Thanks for sending your message, we will get back to you shortly.</p>
+    <h1>An error occurred while exporting</h1>
+    <p>@Html.Raw(TempData["ErrorMessage"])</p>
+}
+else if (TempData["DownloadUrl"] != null)
+{
+    <h1>File has been successfully exported</h1>
+    <a href="@TempData["DownloadUrl"]">Click Here to download the export</a>
 }
 else
 {

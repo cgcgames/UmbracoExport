@@ -1,5 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using Umbraco.Core.Logging;
 using Umbraco.Web.Mvc;
+using UmbracoExport.Core.Models.Enums;
 using UmbracoExport.Core.Services.Interfaces;
 using UmbracoExport.Models.ViewModels;
 
@@ -18,10 +21,26 @@ namespace UmbracoExport.Controllers
         {
             return PartialView("_ExportForm", new UmbracoExportViewModel());
         }
+
         // GET
         public ActionResult ExportUmbracoContentTree(UmbracoExportViewModel viewModel)
         {
-            
+            //replace with a dynamic user selected noded
+            try
+            {
+                var homepage = Umbraco.TypedContentSingleAtXPath("//home");
+
+                if (viewModel.FileType == FileTypeEnum.JSON)
+                {
+                    TempData["DownloadUrl"] = _exportService.ExportNodeAndChildrenToJson(homepage);
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "true";
+                TempData["ErrorMessage"] = $"There has been an error with the export: {ex.Message} <br/> check the logs for more details";
+                LogHelper.Error<Exception>(ex.Message, ex);
+            }
             return RedirectToCurrentUmbracoPage();
         }
     }

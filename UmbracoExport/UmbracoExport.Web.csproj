@@ -648,6 +648,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\sass\layout\" />
     <Folder Include="Content\sass\pages\" />
+    <Folder Include="Exports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
