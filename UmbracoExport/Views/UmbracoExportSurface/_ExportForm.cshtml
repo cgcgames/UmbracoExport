@@ -13,13 +13,18 @@
 }
 else
 {
+
     using (Html.BeginUmbracoForm<UmbracoExportSurfaceController>("ExportUmbracoContentTree"))
     {
         @Html.ValidationSummary(true)
         @Html.AntiForgeryToken()
-
-        @Html.EnumDropDownListFor(m => m.FileType, new { @class = "form-control" })
-
-        <input type="submit" value="Send" />
+        <div class="row">
+            <div class="col-md-9">
+                @Html.EnumDropDownListFor(m => m.FileType, new { @class = "form-control-lg fill" })
+            </div>
+            <div class="col-md-3">
+                <input class="btn btn-default" type="submit" value="Send" />
+            </div>
+        </div>
     }
 }

@@ -5,21 +5,16 @@
     Layout = "Master.cshtml";
     var user = UmbracoContext.Current.Security.CurrentUser;
     var userTicket = new System.Web.HttpContextWrapper(System.Web.HttpContext.Current).GetUmbracoAuthTicket();
-    if (userTicket != null) {     
-        var currentUser = ApplicationContext.Services.UserService.GetByUsername(userTicket.Name);
-        if (!currentUser.IsAdmin())
-        {
-            Response.Redirect("/");
-        }
-    }
+    if (userTicket == null) { Response.Redirect("/"); }
+    
+    var currentUser = ApplicationContext.Services.UserService.GetByUsername(userTicket.Name);
+    if (!currentUser.IsAdmin()){Response.Redirect("/");}
 }
 
+@Html.Partial("~/Views/Partials/SectionHeader.cshtml")
 
-
-<section class="section section">
+<section class="section container">
     @Html.GetGridHtml(Model.Content, "bodyText", "bootstrap3-fluid")
-</section>
 
-<section class="container">
     @Html.Action("RenderExportForm", "UmbracoExportSurface")
 </section>
