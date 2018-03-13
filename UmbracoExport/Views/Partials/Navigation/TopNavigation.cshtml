@@ -1,7 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @using Umbraco.Web;
 @{ 
-    var site = Model.Content.Site();
+    var site = Umbraco.TypedContentSingleAtXPath("//home");
     var selection = site.Children.Where(x => x.IsVisible());
 }
 <!-- uncomment this line if you don't want it to appear in the top navigation -->

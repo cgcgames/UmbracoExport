@@ -5,7 +5,7 @@
     Layout = null;
 
     // Get basic design settings from the homepage
-    ContentModels.Home home = Model.Content.Site() as ContentModels.Home;
+    ContentModels.Home home = Umbraco.TypedContentSingleAtXPath("//home") as ContentModels.Home;
     var colorTheme = Umbraco.GetPreValueAsString(home.ColorTheme);
     var font = Umbraco.GetPreValueAsString(home.Font);
 }
