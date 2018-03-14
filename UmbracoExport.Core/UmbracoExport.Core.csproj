@@ -218,6 +218,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extentions\UmbracoExtentions.cs" />
     <Compile Include="Models\Enums\FileTypeEnum.cs" />
     <Compile Include="Models\NodeProperty.cs" />
     <Compile Include="Models\NodeContent.cs" />
