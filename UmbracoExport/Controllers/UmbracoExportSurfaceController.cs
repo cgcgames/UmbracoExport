@@ -30,9 +30,16 @@ namespace UmbracoExport.Controllers
             {
                 var homepage = Umbraco.TypedContentSingleAtXPath("//home");
 
-                if (viewModel.FileType == FileTypeEnum.JSON)
+                switch (viewModel.FileType)
                 {
-                    TempData["DownloadUrl"] = _exportService.ExportNodeAndChildrenToJson(homepage);
+                    case FileTypeEnum.CSV:
+                        TempData["DownloadUrl"] = _exportService.ExportNodeAndChildrenToCsv(homepage);
+                        break;
+                    case FileTypeEnum.JSON:
+                        TempData["DownloadUrl"] = _exportService.ExportNodeAndChildrenToJson(homepage);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
             catch (Exception ex)
