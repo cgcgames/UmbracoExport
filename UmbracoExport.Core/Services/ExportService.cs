@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using CsvHelper;
 using Newtonsoft.Json;
 using umbraco.presentation;
 using Umbraco.Core;
 using Umbraco.Core.Models;
+using UmbracoExport.Core.Extentions;
 using UmbracoExport.Core.Models;
 using UmbracoExport.Core.Services.Interfaces;
 
@@ -12,18 +16,9 @@ namespace UmbracoExport.Core.Services
 {
     public class ExportService : IExportService
     {
-        private NodeContent _exportCollection;
-
         public string ExportNodeAndChildrenToJson(IPublishedContent node)
         {
-            _exportCollection = NodeContent.ToNodeContent(node);
-            _exportCollection.Properties.AddRange(node.Properties.Select(NodeProperty.ToNodeProperty));
-            if (node.Children.Any())
-            {
-                GetAllNodes(node, _exportCollection);
-            }
-
-            var json = JsonConvert.SerializeObject(_exportCollection, Formatting.Indented, new JsonSerializerSettings
+            var json = JsonConvert.SerializeObject(node.GetAllNodes(), Formatting.Indented, new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
@@ -39,22 +34,22 @@ namespace UmbracoExport.Core.Services
 
         public string ExportNodeAndChildrenToCsv(IPublishedContent node)
         {
-            throw new System.NotImplementedException();
-        }
+            var targetDir = HttpContext.Current.Server.MapPath("~/Exports/");
+            var fileName = $"{node.Name}_WithChildren_{Guid.NewGuid()}.csv";
 
-        private static void GetAllNodes(IPublishedContent node, NodeContent nodeContent)
-        {
-            foreach (var child in node.Children)
+            using (var sw = new StreamWriter($@"{targetDir}\{fileName}"))
+            using (var cw = new CsvWriter(sw))
             {
-                var ncChild = NodeContent.ToNodeContent(child);
-                ncChild.Properties.AddRange(child.Properties.Select(NodeProperty.ToNodeProperty));
-                nodeContent.Children.Add(ncChild);
+                cw.WriteHeader<NodeFlatContent>();
 
-                if (child.Children.Any())
+                foreach (var page in node.GetAllNodesFlat())
                 {
-                    GetAllNodes(child, ncChild);
+                    cw.NextRecord();
+                    cw.WriteRecord(page);
                 }
             }
+
+            return $"/Exports/{fileName}";
         }
     }
 }

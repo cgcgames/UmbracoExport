@@ -220,6 +220,7 @@
   <ItemGroup>
     <Compile Include="Extentions\UmbracoExtentions.cs" />
     <Compile Include="Models\Enums\FileTypeEnum.cs" />
+    <Compile Include="Models\NodeFlatContent.cs" />
     <Compile Include="Models\NodeProperty.cs" />
     <Compile Include="Models\NodeContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
