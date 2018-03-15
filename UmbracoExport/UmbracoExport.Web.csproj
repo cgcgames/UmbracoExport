@@ -687,7 +687,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UmbracoExport.Core\UmbracoExport.Core.csproj">
-      <Project>{dd8d3152-0f8b-42e2-903d-06dedc6b343d}</Project>
+      <Project>{e64f809f-1d18-402b-9b7f-006097e05501}</Project>
       <Name>UmbracoExport.Core</Name>
     </ProjectReference>
   </ItemGroup>

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DD8D3152-0F8B-42E2-903D-06DEDC6B343D}</ProjectGuid>
+    <ProjectGuid>{E64F809F-1D18-402B-9B7F-006097E05501}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UmbracoExport.Core</RootNamespace>
@@ -61,7 +61,7 @@
       <HintPath>..\packages\UmbracoCms.Core.7.9.2\lib\net45\controls.dll</HintPath>
     </Reference>
     <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
-      <HintPath>..\packages\CsvHelper.7.0.1\lib\net45\CsvHelper.dll</HintPath>
+      <HintPath>..\packages\CsvHelper.7.1.0\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
     <Reference Include="Examine, Version=0.1.89.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Examine.0.1.89\lib\net45\Examine.dll</HintPath>
@@ -220,9 +220,9 @@
   <ItemGroup>
     <Compile Include="Extentions\UmbracoExtentions.cs" />
     <Compile Include="Models\Enums\FileTypeEnum.cs" />
+    <Compile Include="Models\NodeContent.cs" />
     <Compile Include="Models\NodeFlatContent.cs" />
     <Compile Include="Models\NodeProperty.cs" />
-    <Compile Include="Models\NodeContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ExportService.cs" />
     <Compile Include="Services\Interfaces\IExportService.cs" />
